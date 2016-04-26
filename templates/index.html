@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title></title>
@@ -17,12 +17,6 @@
             {
                // Let us open a web socket
                var ws = new WebSocket("ws://" + window.location.hostname + ":9000/");
-                
-               ws.onopen = function()
-               {
-                  // Web Socket is connected, send data using send()
-                  ws.send("Message to send");
-               };
                 
                ws.onmessage = function (evt) 
                { 
