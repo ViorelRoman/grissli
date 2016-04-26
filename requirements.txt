@@ -1,0 +1,4 @@
+BeautifulSoup==3.2.1
+Django==1.9.4
+Twisted==16.1.1
+autobahn==0.13.1

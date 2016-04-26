@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+    <style type="text/css">
+        textarea {
+            width: 45%;
+            height: 200px;
+            margin-right: 2%;
+        }
+    </style>
+      <script type="text/javascript">
+         window.onload = function ()
+         {
+            if ("WebSocket" in window)
+            {
+               // Let us open a web socket
+               var ws = new WebSocket("ws://" + window.location.hostname + ":9000/");
+                
+               ws.onopen = function()
+               {
+                  // Web Socket is connected, send data using send()
+                  ws.send("Message to send");
+               };
+                
+               ws.onmessage = function (evt) 
+               { 
+                   var data = JSON.parse(evt.data);
+                   var ret1 = '<дата ' + data.date + '>: url: ' + data.url + '; success: ' + data.success + '\n';
+                   var ret2 = data.url;
+                   if (data.success == true){
+                       ret2 += ' - title: ' + data.title + '; h1: ' + data.h1 + '; enconding: ' + data.encoding;
+                   }
+                   ret2 += '\n';
+                   document.getElementById("logs1").value += ret1;
+                   document.getElementById("logs2").value += ret2;
+               };
+                
+               ws.onclose = function()
+               { 
+                  // websocket is closed.
+                  alert("Connection is closed..."); 
+               };
+            }
+            
+            else
+            {
+               // The browser doesn't support WebSocket
+               alert("WebSocket NOT supported by your Browser!");
+            }
+         }
+      </script>
+</head>
+<body>
+      <textarea id="logs1"></textarea>
+      <textarea id="logs2"></textarea>
+</body>
+</html>
